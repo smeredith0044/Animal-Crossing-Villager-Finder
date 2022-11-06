@@ -11,13 +11,13 @@ class Program
     static async Task Main(String[] args)
     {
 
-        // Type your username and press enter
+        // Type a Villager name and press enter
         Console.WriteLine("Enter villager name:");
 
         // Create a string variable and get user input from the keyboard and store it in the variable
         string villagerName = Console.ReadLine();
 
-        // Print the value of the variable (userName), which will display the input value
+        // Print the value of the variable (villagerName), which will display the input value
         Console.WriteLine("villager is: " + villagerName);
 
         using var client = new HttpClient();
