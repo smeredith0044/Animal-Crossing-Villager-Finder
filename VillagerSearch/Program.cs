@@ -33,6 +33,7 @@ class Program
                 //Catch errors and write to error.txt file in the project path
                 string fileName = "error.txt";
                 string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+                Console.WriteLine("oops there were some errors please see: " + destPath);
                 Console.WriteLine(destPath);
                 File.WriteAllText(destPath, e.ToString());
                 Environment.Exit(0);
@@ -48,6 +49,7 @@ class Program
         // Print the value of the variable (villagerName), which will display the input value
         Console.WriteLine("villager is: " + villagerName);
 
+            Boolean matchFound = false;
             foreach (Villager villager in villagerList) {
                 foreach (KeyValuePair<string, string> name in villager.name) {
 
@@ -55,6 +57,7 @@ class Program
                 {
                     if (name.Value.ToLower().Equals(villagerName.ToLower()))
                     {
+                        matchFound = true;
                         Console.WriteLine("theres a match!");
                         villager.print(false);
                         break;
@@ -64,6 +67,10 @@ class Program
                 }
                 }
 
+        }
+            if (!matchFound)
+        {
+            Console.WriteLine("No match found, please try again!");
         }
         
         }
