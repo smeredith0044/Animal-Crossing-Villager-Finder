@@ -52,7 +52,6 @@ namespace VillagerSearch
             Console.WriteLine("hobby: " + this.hobby);
             Console.WriteLine("CatchPhrase: " + this.CatchPhrase);
             Console.WriteLine("saying: " + this.saying);
-            Console.WriteLine("CatchTranslations: " + this.CatchTranslations["catch-USen"]);
         }
 
         private void printAsJsonString()
