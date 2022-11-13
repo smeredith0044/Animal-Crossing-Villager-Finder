@@ -10,8 +10,8 @@ This project is an Animal Crossing Villager Finder. the basic functionality of t
 ## Features
 
 - Connected to a 3rd party APi That read the Villager data into the app
-- Read and Deserialized the Json Data and used it in my application, the app also reads back the villager info in a json format.
-
+- Deserialized Json api response and printed as plain text.
+- Caught any exceptions and printed them to an error log.
 
 
 
