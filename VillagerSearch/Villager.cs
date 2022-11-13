@@ -15,13 +15,13 @@ namespace VillagerSearch
         public string gender { get; set; }
         public string subtype { get; set; }
         public string hobby { get; set; }
-        //public string catch-phrase { get; set; }
+        public string CatchPhrase { get; set; }
         public string icon_uri { get; set; }
         public string image_uri { get; set; }
-        //public string bubble-color { get; set; }
-        //public string text-color { get; set; }
+        public string BubbleColor { get; set; }
+        public string TextColor { get; set; }
         public string saying { get; set; }
-        //public IDictionary<string, string> catch-translations { get; set; }
+        public IDictionary<string, string> CatchTranslations { get; set; }
 
         // extra fields
         [Newtonsoft.Json.JsonExtensionData]
@@ -30,13 +30,37 @@ namespace VillagerSearch
         {
         }
 
-        override
-        public string ToString()
+        public void print(Boolean getAsJson)
         {
-            var jsonString = JsonConvert.SerializeObject(
+            if (getAsJson)
+            {
+                printAsJsonString();
+            }
+            else
+            {
+                printAsPlainText();
+            }
+        }
+
+        private void printAsPlainText()
+        {
+            Console.WriteLine("name: " + this.name["name-USen"]);
+            Console.WriteLine("personality: " + this.personality);
+            Console.WriteLine("birthday: " + this.birthday);
+            Console.WriteLine("species: " + this.species);
+            Console.WriteLine("gender: " + this.gender);
+            Console.WriteLine("hobby: " + this.hobby);
+            Console.WriteLine("CatchPhrase: " + this.CatchPhrase);
+            Console.WriteLine("saying: " + this.saying);
+            Console.WriteLine("CatchTranslations: " + this.CatchTranslations["catch-USen"]);
+        }
+
+        private void printAsJsonString()
+        {
+            String json = JsonConvert.SerializeObject(
            this, Formatting.Indented,
            new JsonConverter[] { new StringEnumConverter() });
-            return jsonString;
+            Console.WriteLine(json);
         }
     }
 }

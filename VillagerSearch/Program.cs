@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VillagerSearch;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace HttpClientStatus;
 
 class Program
@@ -10,16 +13,6 @@ class Program
     // Main Method
     static async Task Main(String[] args)
     {
-
-        // Type a Villager name and press enter
-        Console.WriteLine("Enter villager name:");
-
-        // Create a string variable and get user input from the keyboard and store it in the variable
-        string villagerName = Console.ReadLine();
-
-        // Print the value of the variable (villagerName), which will display the input value
-        Console.WriteLine("villager is: " + villagerName);
-
         using var client = new HttpClient();
 
         var result = await client.GetAsync("https://acnhapi.com/v1/villagers/");
@@ -34,11 +27,27 @@ class Program
                 string value = Convert.ToString(root.Value);
                 Villager villager = JsonConvert.DeserializeObject<Villager>(value);
                 villagerList.Add(villager);
-            } catch (SystemException e)
+            }
+            catch (SystemException e)
             {
-                Console.WriteLine(e);
+                //Catch errors and write to error.txt file in the project path
+                string fileName = "error.txt";
+                string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+                Console.WriteLine(destPath);
+                File.WriteAllText(destPath, e.ToString());
+                Environment.Exit(0);
             }
         }
+
+        // Type a Villager name and press enter
+        Console.WriteLine("Enter villager name:");
+
+        // Create a string variable and get user input from the keyboard and store it in the variable
+        string villagerName = Console.ReadLine();
+
+        // Print the value of the variable (villagerName), which will display the input value
+        Console.WriteLine("villager is: " + villagerName);
+
             foreach (Villager villager in villagerList) {
                 foreach (KeyValuePair<string, string> name in villager.name) {
 
@@ -47,13 +56,16 @@ class Program
                     if (name.Value.ToLower().Equals(villagerName.ToLower()))
                     {
                         Console.WriteLine("theres a match!");
-                        Console.WriteLine(villager.ToString());
-
+                        villager.print(false);
                         break;
+
                     }
+
                 }
                 }
-            }
+
+        }
+        
         }
 }
 
