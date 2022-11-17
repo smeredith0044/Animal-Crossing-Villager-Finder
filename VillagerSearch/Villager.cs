@@ -21,7 +21,7 @@ namespace VillagerSearch
         public string BubbleColor { get; set; }
         public string TextColor { get; set; }
         public string saying { get; set; }
-        public IDictionary<string, string> CatchTranslations { get; set; }
+        //public IDictionary<string, string> CatchTranslations { get; set; }
 
         // extra fields
         [Newtonsoft.Json.JsonExtensionData]
@@ -52,6 +52,7 @@ namespace VillagerSearch
             Console.WriteLine("hobby: " + this.hobby);
             Console.WriteLine("CatchPhrase: " + this.CatchPhrase);
             Console.WriteLine("saying: " + this.saying);
+            //Console.WriteLine("CatchTranslations: " + this.CatchTranslations["catch-USen"]);
         }
 
         private void printAsJsonString()
