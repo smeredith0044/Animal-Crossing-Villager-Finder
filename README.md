@@ -20,3 +20,4 @@ This project is an Animal Crossing Villager Finder. the basic functionality of t
 - Clone the git repo using the git clone button
 - open the project in visual studio
 - Debug and begin to run the console app.
+- If api is not responding please search for the villager "raymond"
