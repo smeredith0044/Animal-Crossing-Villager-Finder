@@ -38,7 +38,7 @@ class Program
         }
         catch (Exception e)
         {
-            //Catch errors and write to error.txt file in the project path
+            //Catch errors and write to error.txt file in the debug folder 
             string fileName = "error.txt";
             string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             Console.WriteLine("oops there were some errors please see: " + destPath);
