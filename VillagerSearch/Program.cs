@@ -22,19 +22,7 @@ class Program
 
             var result = await client.GetAsync("https://acnhapi.com/v1/villagers/");
             Console.WriteLine(result.StatusCode);
-            string responseBody = await result.Content.ReadAsStringAsync();
-            dynamic objects = JsonConvert.DeserializeObject(@responseBody); // parse as array  
-
-            foreach (var root in objects)
-            {
-
-
-                string value = Convert.ToString(root.Value);
-                Villager villager = JsonConvert.DeserializeObject<Villager>(value);
-                villagerList.Add(villager);
-
-
-            }
+            villagerList = await GetVillagerList(result); 
         }
         catch (Exception e)
         {
@@ -49,6 +37,7 @@ class Program
             name.Add("name-USen", "raymond");
             emergencyVillager.name = name;
             villagerList.Add(emergencyVillager);
+
         }
         // Type a Villager name and press enter
         Console.WriteLine("Enter villager name:");
@@ -85,6 +74,22 @@ class Program
             Console.WriteLine("No match found, please try again!");
         }
 
+    }
+
+    private static async Task<List<Villager>> GetVillagerList(HttpResponseMessage result)
+    {
+        string responseBody = await result.Content.ReadAsStringAsync();
+        dynamic objects = JsonConvert.DeserializeObject(@responseBody); // parse as array  
+        List<Villager> villagerList = new List<Villager>();
+
+        foreach (var root in objects) 
+        {
+            string value = Convert.ToString(root.Value);
+            Villager villager = JsonConvert.DeserializeObject<Villager>(value);
+            villagerList.Add(villager);
+
+        }
+        return villagerList;
     }
 }
 
